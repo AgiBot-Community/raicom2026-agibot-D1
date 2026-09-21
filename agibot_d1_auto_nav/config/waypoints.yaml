@@ -1,0 +1,28 @@
+/**:
+  ros__parameters:
+    # Initial localization pose.
+    initial_x: 0.0
+    initial_y: 0.0
+    initial_yaw: 0.0
+
+    # Competition target points.
+    a_x: 3.0
+    a_y: -0.533
+    a_yaw: 0.0
+
+    b_x: 2.68
+    b_y: -2.67
+    b_yaw: -1.7
+
+    c_x: 0.1705
+    c_y: -2.59
+    c_yaw: 3.05
+
+    # Route intermediate points.
+    path1_mid_x: 3.14
+    path1_mid_y: -1.14
+    path1_mid_yaw: -1.62
+
+    path2_mid_x: 2.1
+    path2_mid_y: -1.2
+    path2_mid_yaw: -1.57

@@ -1,0 +1,46 @@
+# ROS 2 / colcon output
+build/
+install/
+log/
+**/build/
+**/install/
+**/log/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.local.yaml
+*.local.yml
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Runtime captures and generated validation images
+tmp/
+**/tmp/
+agibot_d1_auto_nav/validation/*/
+*.wav
+
+# Downloaded speech models; obtain them with scripts/download_speech_model.py
+agibot_d1_auto_nav/agibot_d1_auto_nav/models/speech/
+
+# ROS bags and crash artifacts
+*.bag
+*.db3
+*.mcap
+core
+core.*
+

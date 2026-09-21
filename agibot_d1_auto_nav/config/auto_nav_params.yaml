@@ -1,0 +1,164 @@
+/**:
+  ros__parameters:
+    goal_frame: map
+    wait_at_a_sec: 2.0
+    a_arrival_speech: 已到达a点
+    debug_mode: false
+    voice_command_enabled: true
+    voice_command_a: 请引领到目标点A
+    voice_command_b: 请引领到目标点B
+    voice_command_c: 请引领到目标点C
+    voice_command_start_recognition: 开始识别
+    voice_command_find_target: 请寻找指定目标
+    voice_command_can_pass: 是否可以通行
+    # 可选 faster_whisper 或 vosk，只需修改这一项即可切换。
+    voice_command_backend: faster_whisper
+    # 可选 base 或 small；当前默认 base。模型路径默认从包内 models/speech 读取，
+    # 也可通过 AGIBOT_WHISPER_BASE_MODEL_PATH / AGIBOT_WHISPER_SMALL_MODEL_PATH 覆盖。
+    voice_command_faster_whisper_model_size: base
+    # faster-whisper 使用 CPU int8；单候选解码并限制为 4 个推理线程。
+    voice_command_faster_whisper_beam_size: 1
+    voice_command_faster_whisper_cpu_threads: 4
+    # Vosk 为可选后端，路径可通过 AGIBOT_VOSK_MODEL_PATH 覆盖。
+    voice_command_device_id: 1
+    voice_command_sample_rate: 44100
+    voice_command_channels: 2
+    voice_command_sample_format: S16_LE
+    voice_command_chunk_size: 4000
+    voice_command_timeout_sec: 0.0
+    # 安全兜底：false 表示任意非空识别文本不能直接触发机器人动作。
+    voice_accept_any_recognized_text: false
+    voice_any_speech_rms_threshold: 100.0
+    voice_any_speech_consecutive_chunks: 3
+    # 节点启动时静默采集一次环境音，后续所有语音任务复用该固定噪声基线。
+    voice_noise_calibration_sec: 0.5
+    voice_threshold_multiplier: 3.0
+    voice_pre_roll_sec: 0.3
+    voice_end_silence_sec: 0.8
+    voice_min_utterance_sec: 0.35
+    voice_max_utterance_sec: 10.0
+    # 整句话最多放大 4 倍；避免把底噪逐块拉到满幅。
+    voice_max_digital_gain: 4.0
+    # command: 按指令语义和目标点匹配（推荐）；percentage: 按相似度阈值匹配。
+    # first_nonempty 仅用于麦克风诊断，正式任务请勿使用。
+    voice_text_match_mode: command
+    voice_text_match_percentage: 65.0
+    mid_obstacle_speech: 前方发现障碍物，正在绕行，请小心行走
+    sign_recognition_enabled: true
+    # 留空时保存到 ~/.cache/agibot_d1_auto_nav/captures。
+    sign_capture_output_dir: ""
+    sign_camera_rtsp_urls:
+      - rtsp://192.168.168.168:8554/test
+      - rtsp://192.168.234.1:8554/test
+    sign_camera_warmup_frames: 10
+    sign_camera_open_timeout_sec: 5.0
+    sign_vote_frame_count: 20
+    sign_vote_frame_interval_sec: 0.1
+    sign_min_valid_frames: 3
+    sign_min_char_vote_ratio: 0.55
+    sign_min_color_vote_ratio: 0.50
+    sign_save_all_frames: false
+    sign_preprocess_enabled: false
+    sign_preprocess_saturation_threshold: 100
+    # right: left letter + right digit; left: left digit + right letter
+    sign_digit_position: right
+    speech_voice: cmn
+    speech_speed: 175
+    speech_pitch: 50
+    speech_volume: 100
+    speech_player: auto
+    speech_device: ""
+    moving_obstacle_speech: 注意前方有障碍物，正在避让
+    moving_obstacle_scan_topic: /scan
+    moving_obstacle_enable_on_a_to_b: true
+    moving_obstacle_enable_on_b_to_c: true
+    # 每次进入对应路段后重新计数；0 禁止播报，负数表示不限制次数。
+    a_to_b_obstacle_speech_max_count: 1
+    b_to_c_obstacle_speech_max_count: 1
+    # 先于 Nav2 的 2.5 m 障碍标记范围触发播报，并保持在 3.0 m 雷达清障范围内。
+    moving_obstacle_distance_threshold: 2.8
+    moving_obstacle_delta_threshold: 0.08
+    moving_obstacle_front_angle_deg: 24.0
+    moving_obstacle_cooldown_sec: 4.0
+    # 导航阶段动态避障：终点靠近时减小软膨胀，B->C 时扩大安全距离并降速。
+    dynamic_avoidance_profiles_enabled: true
+    avoidance_parameter_timeout_sec: 3.0
+    endpoint_inflation_radius: 0.18
+    endpoint_cost_scaling_factor: 25.0
+    endpoint_obstacle_scale: 0.01
+    endpoint_max_linear_speed: 0.16
+    endpoint_max_angular_speed: 0.25
+    # Nav2 第一层完成判定的统一 XY 距离，适用于所有导航阶段。
+    nav2_xy_goal_tolerance: 0.25
+    endpoint_yaw_goal_tolerance: 0.5
+    # 接近 B 或 C 到此距离时切换到相同的 endpoint 激进配置。
+    endpoint_profile_switch_distance: 0.90
+    # 从 C 点前往任务 5 目标时，短距离使用更灵活的转向配置。
+    c_departure_profile_distance: 0.45
+    c_departure_inflation_radius: 0.16
+    c_departure_cost_scaling_factor: 20.0
+    c_departure_max_linear_speed: 0.20
+    c_departure_max_angular_speed: 0.38
+    # B->C 动态障碍物绕行参数。footprint_padding 是机身轮廓外的硬安全余量。
+    b_to_c_footprint_padding: 0.04
+    b_to_c_inflation_radius: 0.55
+    # 全局规划提前绕远；局部膨胀略小，保留连续执行轨迹的空间。
+    b_to_c_global_inflation_radius: 0.70
+    b_to_c_cost_scaling_factor: 5.5
+    b_to_c_obstacle_scale: 0.5
+    # 降低贴原路径权重，提高朝目标推进权重，减少障碍物前反复试探。
+    b_to_c_path_align_scale: 4.0
+    b_to_c_goal_align_scale: 6.0
+    b_to_c_path_dist_scale: 6.0
+    b_to_c_goal_dist_scale: 32.0
+    # 保留零速度急停能力；有可行绕行轨迹时不选择低于此值的前进速度。
+    b_to_c_min_linear_speed: 0.04
+    b_to_c_max_linear_speed: 0.13
+    b_to_c_max_angular_speed: 0.30
+    b_to_c_forward_point_distance: 0.35
+    b_to_c_sim_time: 2.0
+    # 离开 B 点前保留 endpoint 激进配置，走出此距离后再启用 B->C 保守绕障。
+    b_departure_profile_distance: 0.60
+    b_arrival_speech: 已到达b点
+    wait_at_b_sec: 2.0
+    c_arrival_speech: 已到达c点
+    task5_enabled: true
+    qrcode_capture_output_dir: ""
+    qrcode_camera_rtsp_urls:
+      - rtsp://192.168.168.168:8554/test
+      - rtsp://192.168.234.1:8554/test
+    qrcode_camera_warmup_frames: 10
+    qrcode_camera_open_timeout_sec: 5.0
+    qrcode_vote_frame_count: 5
+    qrcode_vote_frame_interval_sec: 0.1
+    qrcode_min_valid_votes: 2
+    qrcode_recognition_max_attempts: 3
+    task6_enabled: true
+    traffic_light_capture_output_dir: ""
+    traffic_light_camera_rtsp_urls:
+      - rtsp://192.168.168.168:8554/test
+      - rtsp://192.168.234.1:8554/test
+    traffic_light_camera_warmup_frames: 10
+    traffic_light_camera_open_timeout_sec: 5.0
+    traffic_light_vote_frame_count: 15
+    traffic_light_vote_frame_interval_sec: 0.1
+    traffic_light_min_valid_votes: 3
+    traffic_light_min_confidence: 0.55
+    traffic_light_saturation_threshold: 80
+    traffic_light_value_threshold: 145
+    traffic_light_min_component_area: 20
+    traffic_light_recognition_max_attempts: 3
+    # A->B 固定路线：1 使用 path1_mid；2 使用 path2_mid。识别结果不再改变路线。
+    path_option: 2
+    nav_timeout_sec: 300.0
+    initial_pose_republish_count: 5
+    initial_pose_republish_interval_sec: 1.0
+    wait_for_amcl_timeout_sec: 20.0
+    wait_for_nav_server_timeout_sec: 60.0
+    wait_for_nav_active_timeout_sec: 60.0
+    # Nav2 返回成功后的到点二次确认；false 时直接采用 Nav2 的完成结果。
+    stage_reach_confirmation_enabled: false
+    stage_reach_xy_tolerance: 0.10
+    stage_reach_fallback_xy_tolerance: 0.2
+    stage_reach_stable_sec: 0.5
+    stage_reach_timeout_sec: 5.0

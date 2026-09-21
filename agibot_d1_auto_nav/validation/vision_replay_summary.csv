@@ -1,0 +1,7 @@
+﻿session,expected_number,expected_number_color,expected_letter,expected_letter_color,recognized_number,recognized_number_color,recognized_letter,recognized_letter_color,correct,valid_frames,total_frames,number_confidence,number_color_confidence,letter_confidence,letter_color_confidence,annotated_path
+0016,3,red,D,yellow,3,red,D,yellow,True,20,20,0.9014,0.9990,0.9170,1.0000,0016/sign_result_20260730_074008_885853.jpg
+0019,7,blue,U,purple,7,blue,U,purple,True,20,20,0.9080,0.9974,0.9242,1.0000,0019/sign_result_20260730_074010_240797.jpg
+0023,7,blue,U,purple,7,blue,U,purple,True,20,20,0.9342,0.9991,0.9259,1.0000,0023/sign_result_20260730_074011_307871.jpg
+0026,7,blue,U,purple,7,blue,U,purple,True,20,20,0.9163,0.9954,0.9220,1.0000,0026/sign_result_20260730_074012_405937.jpg
+0029,3,red,D,yellow,3,red,D,yellow,True,20,20,0.8916,0.9989,0.9266,1.0000,0029/sign_result_20260730_074013_583640.jpg
+0034,8,red,S,yellow,8,red,S,yellow,True,20,20,0.9156,0.9922,0.9167,0.9999,0034/sign_result_20260730_074014_633265.jpg
